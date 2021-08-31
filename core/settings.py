@@ -1,9 +1,10 @@
 from pathlib import Path
+from decouple import config
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-SECRET_KEY = '3mzl@ak76^uov6o&cyw^hg%jrg_7%-&4f*uzl0g*v0d_g@@1md'
+SECRET_KEY = config('DJANGO_SECRET_KEY')
 
 DEBUG = True
 
