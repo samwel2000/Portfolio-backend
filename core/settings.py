@@ -20,8 +20,11 @@ INSTALLED_APPS = [
     # my app
     'blog',
     # Third party app
+    'cloudinary_storage',
+    'cloudinary',
     'rest_framework',
     'corsheaders',
+    'ckeditor',
 ]
 
 MIDDLEWARE = [
@@ -101,6 +104,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / 'static'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
@@ -121,3 +125,26 @@ CORS_ALLOW_METHODS = [
     'POST',
     'PUT',
 ]
+
+# Ckeditor config
+CKEDITOR_UPLOAD_PATH = "blogsContent/"
+CKEDITOR_CONFIGS = {
+    'default': 
+        {
+        'toolbar': 'MyCustomToolbar',
+        'extraPlugins': ','.join(
+            [
+                'codesnippet',
+                'widget',
+                'dialog',
+            ]),
+        },
+}
+
+#Cloudinary settings
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'samwel2000',
+    'API_KEY': config('API_KEY'),
+    'API_SECRET': config('API_SECRET')
+}
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'

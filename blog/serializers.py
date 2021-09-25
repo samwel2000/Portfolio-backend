@@ -1,10 +1,13 @@
 from rest_framework import serializers
 from .models import *
+from django.conf import settings
+
 
 class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
-        fields = ('title','category','content','status')
+        fields = ('id','title','blog_intro','category','content','status','photo','slug')
+
         
 class ProjectsSerializer(serializers.ModelSerializer):
     class Meta:
@@ -44,5 +47,16 @@ class ContactContentSerializer(serializers.ModelSerializer):
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
+        fields = '__all__'
+
+class SubscriberSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Subscriber
+        fields = '__all__'
+        
+        
+class ResumeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Resume
         fields = '__all__'
 

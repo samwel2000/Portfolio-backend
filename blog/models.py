@@ -1,5 +1,6 @@
 from django.db import models
-from django.utils import timezone
+from ckeditor_uploader.fields import RichTextUploadingField
+from cloudinary_storage.storage import RawMediaCloudinaryStorage
 
 # Create your models here.
 class Category(models.Model):
@@ -24,7 +25,9 @@ class Post(models.Model):
     ]
     category = models.ManyToManyField(Category)
     title = models.CharField(max_length=1000)
-    content = models.TextField()
+    photo = models.ImageField(upload_to="blog", default="default.png")
+    blog_intro = models.TextField()
+    content = RichTextUploadingField()
     slug = models.SlugField(max_length=250, unique_for_date='created')
     created = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=100, choices=STATUS_CHOICES, default='published')
@@ -48,9 +51,16 @@ class Project(models.Model):
     project_stack = models.TextField(help_text="Enter stack separated by a cooma")
     project_link =models.CharField(max_length=1000, null=True, blank=True)
     github_link =models.CharField(max_length=1000, null=True, blank=True)
+    playstore_link =models.CharField(max_length=1000, null=True, blank=True)
+    appstore_link =models.CharField(max_length=1000, null=True, blank=True)
+    made_at =models.CharField(max_length=1000, default=".......")
+    year =models.IntegerField(default=2021)
     
     def __str__(self):
         return self.heading
+
+    class Meta:
+        ordering = ('-year',)
     
 class HeroContent(models.Model):
     bio_header = models.CharField(max_length=1000)
@@ -99,3 +109,18 @@ class ContactContent(models.Model):
     
     class Meta:
         verbose_name_plural = 'Contact Content'
+        
+class Subscriber(models.Model):
+    email = models.EmailField(max_length=254)
+    
+    def __str__(self):
+        return self.email
+
+class Resume(models.Model):
+    file = models.FileField(upload_to='resume', max_length=300, storage=RawMediaCloudinaryStorage())
+    
+    def __str__(self):
+        return "My resume"
+    
+    class Meta:
+        verbose_name_plural = 'Resume'
