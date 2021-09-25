@@ -13,6 +13,7 @@ ALLOWED_HOSTS = ['localhost:8000', '127.0.0.1',
                  'backend--portfolio.herokuapp.com', 'samwelgodfrey.com']
 
 INSTALLED_APPS = [
+    
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -118,8 +119,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Cors headers settinigs
 # CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOWED_ORIGINS = [
-    "https://example.com",
-    "https://sub.example.com",
+    "https://samwelgodfrey.com",
+    "https://samwelgodfrey-portfolio.netlify.app/",
     "http://127.0.0.1:3000",
     "http://localhost:3000"
 ]
