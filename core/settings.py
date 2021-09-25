@@ -1,3 +1,4 @@
+import dj_database_url
 from pathlib import Path
 from decouple import config
 
@@ -8,7 +9,8 @@ SECRET_KEY = config('DJANGO_SECRET_KEY')
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost:8000', '127.0.0.1',
+                 'backend--portfolio.herokuapp.com', 'samwelgodfrey.com']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -110,10 +112,10 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 
-## setting field type for primary key
+# setting field type for primary key
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-## Cors headers settinigs
+# Cors headers settinigs
 # CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOWED_ORIGINS = [
     "https://example.com",
@@ -130,19 +132,19 @@ CORS_ALLOW_METHODS = [
 # Ckeditor config
 CKEDITOR_UPLOAD_PATH = "blogsContent/"
 CKEDITOR_CONFIGS = {
-    'default': 
+    'default':
         {
-        'toolbar': 'MyCustomToolbar',
-        'extraPlugins': ','.join(
-            [
-                'codesnippet',
-                'widget',
-                'dialog',
-            ]),
+            'toolbar': 'MyCustomToolbar',
+            'extraPlugins': ','.join(
+                [
+                    'codesnippet',
+                    'widget',
+                    'dialog',
+                ]),
         },
 }
 
-#Cloudinary settings
+# Cloudinary settings
 CLOUDINARY_STORAGE = {
     'CLOUD_NAME': 'samwel2000',
     'API_KEY': config('API_KEY'),
@@ -150,9 +152,8 @@ CLOUDINARY_STORAGE = {
 }
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
-#Heroku settings
+# Heroku settings
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-import dj_database_url
 db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
