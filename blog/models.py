@@ -117,6 +117,7 @@ class Subscriber(models.Model):
         return self.email
 
 class Resume(models.Model):
+    name = models.TextField(max_length=100, default='resume')
     file = models.FileField(upload_to='resume', max_length=300, storage=RawMediaCloudinaryStorage())
     
     def __str__(self):

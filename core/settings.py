@@ -120,7 +120,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOWED_ORIGINS = [
     "https://samwelgodfrey.com",
-    "https://samwelgodfrey-portfolio.netlify.app/",
+    "https://samwelgodfrey-portfolio.netlify.app",
     "http://127.0.0.1:3000",
     "http://localhost:3000"
 ]
