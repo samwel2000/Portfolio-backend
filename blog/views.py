@@ -1,6 +1,4 @@
 from django.shortcuts import render
-from django.http import HttpResponse
-from wsgiref.util import FileWrapper
 from rest_framework.generics import ListAPIView, RetrieveAPIView, CreateAPIView
 
 from .models import *
@@ -93,13 +91,6 @@ class CreateSubscriber(CreateAPIView):
     serializer_class = SubscriberSerializer
 
 
-class ResumeDownloadView(ListAPIView):
-
-    def get(self, request, name, format=None):
-        queryset = Resume.objects.get(name=name)
-        file_handle = queryset.file.path
-        document = open(file_handle, 'rb')
-        response = HttpResponse(FileWrapper(document),
-                                content_type='application/pdf')
-        response['Content-Disposition'] = f'attachment:filename=queryset.file.name'
-        return response
+class ResumeView(ListAPIView):
+    queryset = Resume.objects.all()
+    serializer_class = ResumeSerializer

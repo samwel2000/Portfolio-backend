@@ -19,5 +19,5 @@ urlpatterns = [
          name="contactContentlist"),
     path('projects-list/', ProjectstList.as_view(), name="projectslist"),
     path('subscribe/', CreateSubscriber.as_view(), name="suscribe"),
-    path('<str:name>/', ResumeDownloadView.as_view(), name="resume"),
+    path('resume/', ResumeView.as_view(), name="resume"),
 ]
