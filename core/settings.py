@@ -13,7 +13,7 @@ ALLOWED_HOSTS = ['localhost:8000', '127.0.0.1',
                  'backend--portfolio.herokuapp.com', 'samwelgodfrey.com']
 
 INSTALLED_APPS = [
-    
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
