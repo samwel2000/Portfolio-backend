@@ -59,4 +59,10 @@ class ResumeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Resume
         fields = '__all__'
+        
+class CommentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Comment
+        fields = '__all__'
+
 

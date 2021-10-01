@@ -11,11 +11,15 @@ class ProjectAdmin(admin.ModelAdmin):
     
 class ExperienceContentAdmin(admin.ModelAdmin):
     list_display = ('heading', 'dates')
+    
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ('name', 'email','created_on','post')
 
     
 admin.site.register(Post, PostAdmin)
 admin.site.register(Project, ProjectAdmin)
 admin.site.register(ExperienceContent, ExperienceContentAdmin)
+admin.site.register(Comment, CommentAdmin)
 admin.site.register(Organization)
 admin.site.register(Category)
 admin.site.register(HeroContent)

@@ -20,4 +20,5 @@ urlpatterns = [
     path('projects-list/', ProjectstList.as_view(), name="projectslist"),
     path('subscribe/', CreateSubscriber.as_view(), name="suscribe"),
     path('resume/', ResumeView.as_view(), name="resume"),
+    path('comment/', CommentView.as_view(), name="resume"),
 ]

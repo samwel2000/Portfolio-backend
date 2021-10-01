@@ -1,6 +1,5 @@
 from django.shortcuts import render
-from rest_framework.generics import ListAPIView, RetrieveAPIView, CreateAPIView
-
+from rest_framework.generics import ListAPIView, ListCreateAPIView, RetrieveAPIView, CreateAPIView
 from .models import *
 from .serializers import *
 
@@ -25,19 +24,22 @@ class FilterPostList(ListAPIView):
 
     def get_queryset(self):
         get_filter = self.kwargs['filter']
-        print(get_filter)
         if get_filter.lower() == 'data analytics':
             filter_list = ['stata', 'R', 'MS excel']
         elif get_filter.lower() == 'web development':
-            filter_list = ['HTML', 'CSS', 'Javascript',
-                           'ReactJS', 'Django', 'Python']
+            filter_list = [
+                'HTML', 'CSS', 'Javascript',
+                'ReactJS', 'Django', 'Python'
+            ]
         elif get_filter.lower() == 'statistical modelling':
             filter_list = ['statistics', 'R', 'stata']
         elif get_filter.lower() == 'mobile development':
             filter_list = ['Flutter', 'React Native']
         elif get_filter.lower() == 'software development':
-            filter_list = ['HTML', 'CSS', 'Javascript', 'ReactJS',
-                           'Django', 'Python', 'Flutter', 'React Native']
+            filter_list = [
+                'HTML', 'CSS', 'Javascript', 'ReactJS',
+                'Django', 'Python', 'Flutter', 'React Native'
+            ]
         else:
             filter_list = [get_filter]
 
@@ -46,7 +48,6 @@ class FilterPostList(ListAPIView):
             for cat in Category.objects.all():
                 if filter_item.lower() == cat.name.lower():
                     filter_list2.append(cat.id)
-        print(filter_list, filter_list2)
         return Post.objects.filter(category__in=filter_list2)
 
 
@@ -94,3 +95,9 @@ class CreateSubscriber(CreateAPIView):
 class ResumeView(ListAPIView):
     queryset = Resume.objects.all()
     serializer_class = ResumeSerializer
+
+
+class CommentView(ListCreateAPIView):
+    queryset = Comment.objects.filter()
+    serializer_class = CommentSerializer
+
