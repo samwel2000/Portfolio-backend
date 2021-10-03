@@ -6,7 +6,7 @@ from django.conf import settings
 class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
-        fields = ('id','title','blog_intro','category','content','status','photo','slug')
+        fields = ('id','title','blog_intro','category','content','status','photo','minutes', 'view_count','share_count', 'slug')
 
         
 class ProjectsSerializer(serializers.ModelSerializer):

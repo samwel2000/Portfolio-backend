@@ -31,9 +31,12 @@ class Post(models.Model):
     blog_intro = models.TextField()
     content = RichTextUploadingField()
     slug = models.SlugField(max_length=250, unique_for_date='created')
-    created = models.DateTimeField(auto_now_add=True)
+    created = models.DateTimeField(auto_now=True, blank=True)
     status = models.CharField(
         max_length=100, choices=STATUS_CHOICES, default='published')
+    minutes = models.IntegerField(null=True, blank=True)
+    view_count = models.IntegerField(default=1, null=True, blank=True)
+    share_count = models.IntegerField(default=1, null=True, blank=True)
 
     objects = models.Manager()  # default manager
     postobjects = PostObjects()  # custom manager

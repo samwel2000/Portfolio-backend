@@ -1,7 +1,8 @@
 from django.shortcuts import render
-from rest_framework.generics import ListAPIView, ListCreateAPIView, RetrieveAPIView, CreateAPIView
+from rest_framework.generics import ListAPIView, ListCreateAPIView, RetrieveUpdateAPIView, CreateAPIView
 from .models import *
 from .serializers import *
+from rest_framework.response import Response
 
 
 class ProjectstList(ListAPIView):
@@ -51,10 +52,24 @@ class FilterPostList(ListAPIView):
         return Post.objects.filter(category__in=filter_list2)
 
 
-class PostDetail(RetrieveAPIView):
+class PostDetail(RetrieveUpdateAPIView):
     queryset = Post.postobjects.all()
     serializer_class = PostSerializer
     lookup_field = 'slug'
+
+    def patch(self, request, slug):
+        get_post = Post.objects.get(slug=slug)
+        selializer = PostSerializer(get_post)
+        if 'view_count' in request.data.keys():
+            Post.objects.filter(slug=slug).update(
+                view_count=request.data['view_count'])
+            return Response(selializer.data, status=201)
+        elif 'share_count' in request.data.keys():
+            Post.objects.filter(slug=slug).update(
+                share_count=request.data['share_count'])
+            return Response(selializer.data, status=201)
+        else:
+            return Response({'error': 'something is wrong'}, status=400)
 
 
 class HeroContentList(ListAPIView):
@@ -100,4 +115,3 @@ class ResumeView(ListAPIView):
 class CommentView(ListCreateAPIView):
     queryset = Comment.objects.filter()
     serializer_class = CommentSerializer
-
